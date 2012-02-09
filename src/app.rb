@@ -1,11 +1,12 @@
-$: << File.dirname(__FILE__) unless $:.include? File.dirname(__FILE__)
-
 require 'sinatra/base'
+require 'rack/csrf'
+
 require 'config'
 require 'giftudi/user'
 
 class App < Sinatra::Base
-  set :sessions, true
+  use Rack::Session::Cookie, :secret => "c6df3852815c219b16f51db428662aef"
+  use Rack::Csrf, :raise => true
 
   get '/' do
     erb :index
@@ -13,5 +14,11 @@ class App < Sinatra::Base
 
   post '/login' do
     u = User.authenticate params[:email], params[:password]
+    if u
+      session[:user_id] u.id
+      redirect to("/")
+    else
+      
+    end
   end
 end

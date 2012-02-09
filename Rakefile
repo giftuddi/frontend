@@ -27,3 +27,5 @@ end
 
 desc "run tests"
 task :test => ["redis:start", "misc:test", "redis:stop"]
+
+task :default => :test
