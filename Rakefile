@@ -2,7 +2,7 @@ require 'rake/testtask'
 
 desc "run the server"
 task :run do
-    sh "ruby src/app.rb"
+    sh "rackup ./config.ru"
 end
 
 namespace :misc do
