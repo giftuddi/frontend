@@ -1,15 +1,13 @@
 
 require 'bcrypt'
-require 'giftudi/global'
+require 'giftudi/services'
 require 'giftudi/bread'
 
 class User
+  include Services
+  
   attr_accessor :email, :id, :password_hash
   
-  def self.bread
-    Global.bread
-  end
-
   def initialize args
     @email = args[:email]
     @id = args[:id]

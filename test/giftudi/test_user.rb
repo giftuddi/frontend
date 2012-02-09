@@ -1,28 +1,24 @@
 require "test/unit"
-require "giftudi/user" 
 require "config"
-require "redis"
+require "giftudi/user"
+require "giftudi/gift"
+require "giftudi/bread"
+
 
 Config[:redis] = { :path => "/tmp/test_redis.sock" }
 
 class TestUser < Test::Unit::TestCase
  
   def setup
-    fork do
-      exec "redis-server #{File.join(File.dirname(__FILE__), "..", "test_redis.conf")} > /dev/null"
-    end
+    User.save(User.new email: "brianm@skife.org", 
+                       password: "hello",
+                       id: 1)
+    User.save(User.new email: "ian@example.com", 
+                       password: "dinosaur",
+                       id: 2)
     
-    while !File.exists? "/tmp/test_redis.sock" do sleep 0.1 end
-
-    u = User.new email: "brianm@skife.org", 
-                 password: "hello",
-                 id: 1
-    User.save(u)
-  end
-
-  def teardown
-    pid = File.read("/tmp/test_redis.pid").to_i
-    Process::kill "TERM", pid
+    Gift.redis
+    User.redis                      
   end
 
   def test_simple
@@ -30,5 +26,11 @@ class TestUser < Test::Unit::TestCase
     assert_not_nil u
     assert_equal u.email, "brianm@skife.org"
   end
- 
+
+  def test_authenticate_no_exist
+    u = User.authenticate "brianm@example.org", "hello"
+    assert_nil u
+  end
+
+
 end
