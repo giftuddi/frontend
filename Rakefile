@@ -2,10 +2,10 @@ require 'rake/testtask'
 
 desc "run the server"
 task :run do
-    sh "rackup ./config.ru"
+  sh "rackup ./config.ru"
 end
 
-namespace :misc do
+namespace :_ do
   Rake::TestTask.new do |t|
     t.libs << "src"
     t.test_files = FileList['test/**/test*.rb']
@@ -26,6 +26,6 @@ namespace "redis" do
 end
 
 desc "run tests"
-task :test => ["redis:start", "misc:test", "redis:stop"]
+task :test => ["redis:start", "_:test", "redis:stop"]
 
 task :default => :test
