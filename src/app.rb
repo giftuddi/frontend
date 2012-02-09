@@ -15,7 +15,7 @@ class App < Sinatra::Base
   post '/login' do
     u = User.authenticate params[:email], params[:password]
     if u
-      session[:user_id] u.id
+      session[:user_id] = u.id
       redirect to("/")
     else
       

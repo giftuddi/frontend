@@ -13,6 +13,7 @@ class TestUser < Test::Unit::TestCase
     User.save(User.new email: "brianm@skife.org", 
                        password: "hello",
                        id: 1)
+
     User.save(User.new email: "ian@example.com", 
                        password: "dinosaur",
                        id: 2)
@@ -32,5 +33,9 @@ class TestUser < Test::Unit::TestCase
     assert_nil u
   end
 
+  def test_authenticate_wrong_pass
+    u = User.authenticate "brianm@skife.org", "buh-bye"
+    assert_nil u
+  end
 
 end
