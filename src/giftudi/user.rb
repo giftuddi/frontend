@@ -3,6 +3,42 @@ require 'bcrypt'
 require 'giftudi/services'
 require 'giftudi/bread'
 
+module UserRepo
+  # requires bread
+
+  def users
+    Globals::repo
+  end
+
+  class RedisRepo
+    def authenticate email, pasword
+      id = bread.get "email:#{email}"
+      return nil unless id
+
+      attrs = bread.hget "user:#{id}"
+      pw = BCrypt::Password.new(attrs[:password_hash])
+      if pw == password then
+        User.new attrs
+      end
+    end
+
+    def to_hash
+      {
+        email: email,
+        id: id,
+        password_hash: password_hash
+      }
+    end
+  end
+
+  module Globals
+    def self.repo
+      @repo ||= RedisRepo.new
+    end
+  end
+
+end
+
 class User
   include Services
   

@@ -1,5 +1,24 @@
 require 'redis'
 
+module BreadModule
+  
+  def bread
+    Global::bread
+  end
+
+  module Global
+    def self.redis
+      @redis ||= Redis.new(Config[:redis])
+    end
+
+    def self.bread
+      @bread ||= Bread.new(redis)
+    end
+  end
+
+end
+
+
 class Bread
 
   attr_accessor :redis
