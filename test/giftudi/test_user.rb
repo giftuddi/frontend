@@ -4,7 +4,6 @@ require "giftudi/user"
 require "giftudi/gift"
 require "giftudi/bread"
 
-
 Config[:redis] = { :path => "/tmp/test_redis.sock" }
 
 class TestUser < Test::Unit::TestCase
