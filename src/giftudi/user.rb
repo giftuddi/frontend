@@ -2,6 +2,7 @@
 require 'bcrypt'
 require 'giftudi/services'
 require 'giftudi/bread'
+require 'uuid'
 
 class User
   include Services
@@ -21,6 +22,27 @@ class User
   def self.save user
     bread.hset "user:#{user.id}", user
     bread.set  "email:#{user.email}", user.id
+    user
+  end
+
+  def self.create email, password
+    id = bread.get "email:#{email}"
+    if id
+      u = authenticate email, password
+      return u if u
+
+      raise "account already exists"
+    else
+      u = User.new email: email,
+                   password: password,
+                   id: UUID.generate
+      save u
+    end
+  end
+
+  def self.find id
+    attrs = bread.hget "user:#{id}"
+    User.new attrs  
   end
 
   def self.authenticate email, password
@@ -31,6 +53,8 @@ class User
     pw = BCrypt::Password.new(attrs[:password_hash])
     if pw == password then
       User.new attrs
+    else
+      nil
     end
   end
 

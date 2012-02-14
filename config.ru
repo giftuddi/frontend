@@ -7,5 +7,6 @@ require "app"
 
 map "/" do  
   use Rack::Static, :urls => ['/assets']
+  use Rack::Logger
   run App
 end

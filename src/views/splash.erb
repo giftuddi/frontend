@@ -1,0 +1,26 @@
+<div class="row span12">
+  <form action="/user" method="post" class="form-horizontal">
+    <fieldset>
+      <legend>Create Account</legend>
+      
+      <div class="control-group">
+        <label class="control-label" for="email">Email</label>
+        <div class="controls">
+          <input type="email" id="email" name="email"/>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="password">Password</label>
+        <div class="controls">
+          <input type="password" id="password" name="password"/>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Create Account</button>
+      </div>
+      <%= Rack::Csrf.tag(env) %>
+    </fieldset>
+  </form>
+</div>

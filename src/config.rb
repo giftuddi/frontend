@@ -2,5 +2,5 @@
 
 
 Config = {
-  redis: { :path => "/tmp/redis.sock" }
+  redis: { :path => "/tmp/test_redis.sock" }
 }

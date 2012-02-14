@@ -1,11 +1,19 @@
 require 'rake/testtask'
 
 desc "run the server"
-task :run do
-  sh "rackup ./config.ru"
-end
+task :run => ["redis:start", "_:test_users", "_:run", "redis:stop"]
+
 
 namespace :_ do
+
+  task :test_users => "redis:start" do
+    
+  end
+
+  task :run do
+    sh "rackup --port 4567 ./config.ru"
+  end
+
   Rake::TestTask.new do |t|
     t.libs << "src"
     t.test_files = FileList['test/**/test*.rb']
