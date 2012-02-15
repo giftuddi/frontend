@@ -11,7 +11,7 @@ namespace :_ do
   end
 
   task :run do
-    sh "rackup --port 4567 ./config.ru"
+    sh "shotgun --port 4567 ./config.ru"
   end
 
   Rake::TestTask.new do |t|

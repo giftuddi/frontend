@@ -19,7 +19,7 @@ module Services
 
   module Global
     def self.redis
-      @redis ||= Redis.new(Config[:redis])
+      @redis ||= Redis.new(Config["redis"])
     end
 
     def self.bread

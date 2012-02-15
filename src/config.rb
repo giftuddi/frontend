@@ -1,6 +1,3 @@
+require 'yaml'
 
-
-
-Config = {
-  redis: { :path => "/tmp/test_redis.sock" }
-}
+Config = YAML.load_file 'site.yml'

@@ -1,9 +1,25 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    addressable (2.2.6)
     bcrypt-ruby (3.0.1)
+    facebook_oauth (0.3.0)
+      json (>= 1.5.3)
+      mime-types (>= 1.16)
+      oauth2 (>= 0.5.1)
+    faraday (0.7.6)
+      addressable (~> 2.2)
+      multipart-post (~> 1.1)
+      rack (~> 1.1)
+    json (1.6.5)
     macaddr (1.5.0)
       systemu (>= 2.4.0)
+    mime-types (1.17.2)
+    multi_json (1.0.4)
+    multipart-post (1.1.5)
+    oauth2 (0.5.2)
+      faraday (~> 0.7)
+      multi_json (~> 1.0)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
@@ -24,6 +40,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby
+  facebook_oauth
   rack_csrf
   redis
   sinatra
