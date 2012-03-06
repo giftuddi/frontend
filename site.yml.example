@@ -1,5 +1,0 @@
-fb:
-  app_id: 1234567892
-  secret_key: 123abc456xyz9
-redis:
-  path: "/tmp/test_redis.sock"
