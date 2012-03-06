@@ -1,6 +1,6 @@
 artifact:
-  id: frontend
-  version: 0.0.1-SNAPSHOT
+  id: identity
+  version: 0.0.1
 
 apache:
   version: 2.2.22
