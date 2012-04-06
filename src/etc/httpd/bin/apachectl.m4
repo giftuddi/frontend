@@ -39,6 +39,7 @@
 # one is reported.  Run "apachectl help" for usage info
 #
 ARGV="$@"
+export LD_LIBRARY_PATH=GXY_DEPLOY_ROOT/httpd/lib
 #
 # |||||||||||||||||||| START CONFIGURATION SECTION  ||||||||||||||||||||
 # --------------------                              --------------------
